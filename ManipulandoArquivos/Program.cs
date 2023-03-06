@@ -16,9 +16,13 @@ namespace ManipulandoArquivos
             {
                 sr = File.OpenText(path);
 
-                string line = sr.ReadLine();
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
 
-                Console.WriteLine(line);
+                    Console.WriteLine(line);
+                }
+
             } catch (IOException ex)
             {
                 Console.WriteLine("An error acurred: ");
