@@ -14,8 +14,7 @@ namespace ManipulandoArquivos
 
             try
             {
-                fs = new FileStream(path, FileMode.Open);
-                sr = new StreamReader(fs);
+                sr = File.OpenText(path);
 
                 string line = sr.ReadLine();
 
@@ -27,7 +26,6 @@ namespace ManipulandoArquivos
             } finally
             {
                 if (sr != null) sr.Close();
-                if (fs != null) fs.Close();
             }
         }
     }
