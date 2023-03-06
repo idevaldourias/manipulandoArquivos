@@ -7,24 +7,27 @@ namespace ManipulandoArquivos
     {
         static void Main(string[] args)
         {
-            string sourcePath = @"c:\temp\file1.txt";
-            string targetPath = @"c:\temp\file2.txt";
+            string path = @"c:\temp\file1.txt";
+
+            FileStream fs = null;
+            StreamReader sr = null;
 
             try
             {
-                FileInfo fileInfo = new FileInfo(sourcePath);
-                fileInfo.CopyTo(targetPath);
-                string[] lines = File.ReadAllLines(sourcePath);
+                fs = new FileStream(path, FileMode.Open);
+                sr = new StreamReader(fs);
 
-                foreach (string line in lines)
-                {
-                    Console.WriteLine(line);
-                }
-            }
-            catch (IOException e)
+                string line = sr.ReadLine();
+
+                Console.WriteLine(line);
+            } catch (IOException ex)
             {
-                Console.Write("An error ocurred: ");
-                Console.WriteLine(e.Message);
+                Console.WriteLine("An error acurred: ");
+                Console.WriteLine(ex.Message);
+            } finally
+            {
+                if (sr != null) sr.Close();
+                if (fs != null) fs.Close();
             }
         }
     }
