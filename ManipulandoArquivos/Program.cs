@@ -7,20 +7,29 @@ namespace ManipulandoArquivos
     {
         static void Main(string[] args)
         {
-            string sourcePath = @"c:\temp\file1.txt";
-            string targetPath = @"c:\temp\file2.txt";
-
+            string path = @"c:\temp\myfolder";
+            
             try
             {
-                string[] lines = File.ReadAllLines(sourcePath);
+                IEnumerable<string> folder = Directory.EnumerateDirectories(path, "*.*", SearchOption.AllDirectories);
 
-                using (StreamWriter sw = File.AppendText(targetPath))
+                Console.WriteLine("FOLDERS: ");
+
+                foreach (string s in folder)
                 {
-                    foreach (string line in lines)
-                    {
-                        sw.WriteLine(line.ToUpper());
-                    }
+                    Console.WriteLine(s);
                 }
+
+                IEnumerable<string> files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories);
+
+                Console.WriteLine("FILES: ");
+
+                foreach (string f in files)
+                {
+                    Console.WriteLine(f);
+                }
+
+                Directory.CreateDirectory(path+@"\newfolder");
             }
             catch (IOException e)
             {
