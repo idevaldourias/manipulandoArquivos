@@ -7,29 +7,25 @@ namespace ManipulandoArquivos
     {
         static void Main(string[] args)
         {
-            string path = @"c:\temp\myfolder";
+            string path = @"c:\temp\myfolder\file1.txt";
             
             try
             {
-                IEnumerable<string> folder = Directory.EnumerateDirectories(path, "*.*", SearchOption.AllDirectories);
+                Console.WriteLine("DirectorySeparatorChar: " + Path.DirectorySeparatorChar);
 
-                Console.WriteLine("FOLDERS: ");
+                Console.WriteLine("PathSeparator: " + Path.PathSeparator);
 
-                foreach (string s in folder)
-                {
-                    Console.WriteLine(s);
-                }
+                Console.WriteLine("GetDirectoryName: " + Path.GetDirectoryName(path));
 
-                IEnumerable<string> files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories);
+                Console.WriteLine("GetFileName: " + Path.GetFileName(path));
 
-                Console.WriteLine("FILES: ");
+                Console.WriteLine("GetFileNameWithoutExtension: " + Path.GetFileNameWithoutExtension(path));
 
-                foreach (string f in files)
-                {
-                    Console.WriteLine(f);
-                }
+                Console.WriteLine("GetExtension: " + Path.GetExtension(path));
 
-                Directory.CreateDirectory(path+@"\newfolder");
+                Console.WriteLine("GetFullPath: " + Path.GetFullPath(path));
+
+                Console.WriteLine("GetTempPath: " + Path.GetTempPath());
             }
             catch (IOException e)
             {
